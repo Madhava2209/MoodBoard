@@ -1,0 +1,47 @@
+{% extends 'base_moodlog.html' %}
+
+{% block body %}
+<h1 style="padding-left:500px;">Dashboard</h1>
+<div class="container">
+    <form action="/create-moodlog/" method="post">
+        {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <label for="">Select Mood</label>
+            <select name="user_mood" class="form-control">
+                {% for mood in moods %}
+                <option value="{{mood.id}}">{{mood.title}} {{mood.emoji}}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="">Select Action</label>
+            <select name="user_action" class="form-control">
+                {% for action in actions %}
+                <option value="{{action.id}}">{{action.title}} {{action.emoji}}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+    <br>
+    <label >Note</label>
+    <textarea name="user_note"  class="form-control"></textarea>
+    <br>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+<hr>
+<label >My MoodLogs</label>
+{% for moodlog in moodlogs %}
+<div class="card" style="width: 100%;" >
+    <div class="card-body" >
+        <label >{{moodlog.mood.title}} {{moodlog.mood.emoji}}</label>
+        <label >{{moodlog.action.title}} {{moodlog.action.emoji}}</label>
+        <p>{{moodlog.note}}</p>
+        <label >{{moodlog.timestamp}}</label>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
