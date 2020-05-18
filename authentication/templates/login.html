@@ -4,6 +4,7 @@
 <div style="display: flex;justify-content: center;align-items: center;height: 350px;">
     <div>
      <form action="/login/" method="post" class="form-group">
+        {% csrf_token %}
         <label ></label>
         <br>
         <label style="color: azure;">User Name</label> 
